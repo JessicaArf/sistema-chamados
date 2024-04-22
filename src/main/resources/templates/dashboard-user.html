@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard do Usuário</title>
+</head>
+<body>
+<h2>Dashboard do Usuário</h2>
+
+<!-- Mostrar o nome do cliente -->
+<h3>Bem-vindo, <span th:text="${#strings.capitalize(client.name)}"></span>!</h3>
+
+<!-- Mostrar todos os tickets do cliente -->
+<h3>Meus Tickets</h3>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Descrição</th>
+        <th>Departamento</th>
+        <th>Status</th>
+        <th>Data de Criação</th>
+        <th>Última Atualização</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="ticket : ${tickets}">
+        <td th:text="${ticket.ticketId}"></td>
+        <td th:text="${ticket.description}"></td>
+        <td th:text="${ticket.department}"></td>
+        <td th:text="${ticket.status.description}"></td>
+        <td th:text="${#dates.format(ticket.creationTimestamp, 'dd/MM/yyyy HH:mm:ss')}"></td>
+        <td th:text="${#dates.format(ticket.updatedTimestamp, 'dd/MM/yyyy HH:mm:ss')}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- Botão para criar um novo ticket -->
+<h3>Criar Novo Ticket</h3>
+<form action="/create-ticket" method="get">
+    <button type="submit">Novo Ticket</button>
+</form>
+
+<!-- Botão para fazer logout -->
+<h3>Fazer Logout</h3>
+<form action="/logout" method="post">
+    <button type="submit">Logout</button>
+</form>
+</body>
+</html>
