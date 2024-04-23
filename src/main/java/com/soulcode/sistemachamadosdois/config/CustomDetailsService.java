@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -25,6 +24,7 @@ public class CustomDetailsService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + username));
         // Aqui criamos uma SimpleGrantedAuthority com o nome da role do usuário
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().getName());
+        System.out.println(user.getRole().getName());
         // Retornamos um UserDetails com as informações do usuário e sua autoridade (role)
         return new User(user.getEmail(), user.getPassword(), Collections.singleton(authority));
     }

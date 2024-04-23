@@ -35,6 +35,10 @@ public class ClientService {
         return clientRepository.save(client);
     }
 
+    public Optional<Client> getClientByEmail(String email) {
+        return clientRepository.findByEmail(email);
+    }
+
     public List<Ticket> getTicketById(Long clientId)  {
         List<Ticket> tickets = ticketRepository.findByClientUserId(clientId);
         return tickets;
