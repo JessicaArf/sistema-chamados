@@ -10,7 +10,7 @@
 <div th:if="${registrationSuccess}">
     <p>Cadastrado com sucesso!</p>
 </div>
-<form th:action="@{/register-client}" th:object="${client}" method="post">
+<form th:action="@{/cadastro-cliente}" th:object="${client}" method="post">
     <div>
         <label for="name">Name:</label>
         <input type="text" id="name" th:field="*{name}" required>

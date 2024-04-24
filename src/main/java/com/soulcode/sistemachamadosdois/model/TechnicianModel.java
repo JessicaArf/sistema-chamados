@@ -9,11 +9,10 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@EqualsAndHashCode
 
 @Entity
 @DiscriminatorValue("technician")
-public class Technician extends UserModel {
+public class TechnicianModel extends UserModel {
 
     private String department;
     private String phone;

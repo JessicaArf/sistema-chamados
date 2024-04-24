@@ -16,7 +16,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @Entity
 @Table(name="TB_TICKETS")
-public class Ticket {
+public class TicketModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,19 +33,20 @@ public class Ticket {
     private Instant updatedTimestamp;
 
     @ManyToOne
-    private Client client;
+    private ClientModel client;
 
     @ManyToOne
-    private Technician technician;
+    private TechnicianModel technician;
 
     private TicketStatus status;
 
     private Priority priority;
 
     public enum Priority {
-        LOW,
-        MEDIUM,
-        HIGH;
+        AGUARDANDO,
+        BAIXA,
+        MEDIA,
+        ALTA;
     }
 
     public enum TicketStatus {

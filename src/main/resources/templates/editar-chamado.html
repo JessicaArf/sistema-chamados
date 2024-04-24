@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Chamado</title>
+</head>
+<body>
+<h1>Editar Chamado</h1>
+
+<!-- Formulário para editar o chamado -->
+<form th:action="@{'/editar-chamado/' + ${ticket.ticketId}}" method="post" th:object="${ticket}">
+    <!-- Campo para exibir as informações do chamado -->
+    <label>Número do chamado: <span th:text="${ticket.ticketId}"></span></label><br>
+    <label>Descrição: <span th:text="${ticket.description}"></span></label><br>
+    <label>Departamento: <span th:text="${ticket.department}"></span></label><br>
+    <label>Cliente: <span th:text="${ticket.client.name}"></span></label><br>
+    <label>Data de Abertura: <span th:text="${#dates.format(ticket.creationTimestamp, 'dd/MM/yyyy HH:mm:ss')}"></span></label><br>
+    <label>Última Atualização: <span th:text="${#dates.format(ticket.updatedTimestamp, 'dd/MM/yyyy HH:mm:ss')}"></span></label><br>
+    <label>Técnico Responsável: <span th:text="${name}"></span></label><br>
+    <label>Status Anterior: <span th:text="${ticket.status.description}"></span></label><br>
+    <label>Prioridade Anterior: <span th:text="${ticket.getPriority()}"></span></label><br>
+
+    <!-- Campo para selecionar o novo status do chamado -->
+    <label for="status">Novo Status:</label>
+    <select id="status" name="status">
+        <option value="OPEN">Aguardando técnico</option>
+        <option value="IN_PROGRESS">Em atendimento</option>
+        <option value="FORWARDED">Escalado para outro setor</option>
+        <option value="CLOSED">Finalizado</option>
+    </select>
+
+    <!-- Campo para selecionar a nova prioridade do chamado -->
+    <label for="priority">Nova Prioridade:</label>
+    <select id="priority" name="priority">
+        <option value="BAIXA">Baixa</option>
+        <option value="MEDIA">Média</option>
+        <option value="ALTA">Alta</option>
+    </select>
+
+    <!-- Botão para enviar o formulário -->
+    <button type="submit">Atualizar Chamado</button>
+</form>
+
+<!-- Link para voltar ao Dashboard -->
+<a href="/dashboard-tecnico">Voltar</a>
+</body>
+</html>

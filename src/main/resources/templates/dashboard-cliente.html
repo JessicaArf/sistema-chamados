@@ -14,10 +14,11 @@
 <table border="1">
     <thead>
     <tr>
-        <th>ID</th>
+        <th>Número do chamado</th>
         <th>Descrição</th>
         <th>Departamento</th>
         <th>Status</th>
+        <th>Prioridade</th>
         <th>Data de Criação</th>
         <th>Última Atualização</th>
     </tr>
@@ -28,6 +29,7 @@
         <td th:text="${ticket.description}"></td>
         <td th:text="${ticket.department}"></td>
         <td th:text="${ticket.status.description}"></td>
+        <td th:text="${ticket.getPriority()}"></td>
         <td th:text="${#dates.format(ticket.creationTimestamp, 'dd/MM/yyyy HH:mm:ss')}"></td>
         <td th:text="${#dates.format(ticket.updatedTimestamp, 'dd/MM/yyyy HH:mm:ss')}"></td>
     </tr>
@@ -35,9 +37,9 @@
 </table>
 
 <!-- Botão para criar um novo ticket -->
-<h3>Criar Novo Ticket</h3>
-<form action="/create-ticket" method="get">
-    <button type="submit">Novo Ticket</button>
+<h3>Criar Novo Chamado</h3>
+<form action="/criar-chamado" method="get">
+    <button type="submit">Criar chamado</button>
 </form>
 
 <!-- Botão para fazer logout -->

@@ -1,10 +1,8 @@
 package com.soulcode.sistemachamadosdois.model;
 
-import com.soulcode.sistemachamadosdois.dtos.RequestDTO;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -18,7 +16,7 @@ import java.time.Instant;
 @EqualsAndHashCode
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "Type")
+@DiscriminatorColumn(name = "Type", discriminatorType = DiscriminatorType.STRING)
 public class UserModel implements Serializable {
 
     @Id
@@ -30,17 +28,13 @@ public class UserModel implements Serializable {
     private String email;
     private String password;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id") // Nome da coluna na tabela 'TB_USERS' que armazena o id do role
-    private Role role;
+    private RoleModel role;
 
     private boolean isActive;
 
     @CreationTimestamp
     private Instant creationTimestamp;
-
-    public boolean isLoginCorrect(RequestDTO requestDto, PasswordEncoder passwordEncoder) {
-        return passwordEncoder.matches(requestDto.password(), this.password);
-    }
 
 }
