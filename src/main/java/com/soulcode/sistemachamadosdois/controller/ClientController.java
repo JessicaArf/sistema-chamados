@@ -32,7 +32,6 @@ public class ClientController {
         try {
             // cria o cliente dentro do bd
             clientService.createClient(client);
-            redirectAttributes.addFlashAttribute("registrationSuccess", true);
             return "redirect:/login"; // Redireciona para a página de login
         } catch (Exception e) {
             // em caso de erro
